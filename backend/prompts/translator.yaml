@@ -1,0 +1,20 @@
+_type: prompt
+input_variables:
+  - source_lang
+  - target_lang
+  - source_code
+
+template: |
+  As an expert programming language translator, you will be responsible for translating code from {source_lang} to {target_lang}. 
+
+  Here is the source code that you need to translate:
+
+  {source_code}
+
+  You will need to follow these steps to complete the task:
+
+  1. Look at the source code, identify how each part of the code works, and what it is supposed to do.
+  2. Translate the code into the target language, ensuring that the logic and functionality remain the same.
+  3. Check the translated code for any errors or issues, and make sure it follows the best practices and conventions of the target language.
+
+  Let's think step by step, and provide the translated code here:
