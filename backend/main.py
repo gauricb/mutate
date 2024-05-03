@@ -2,9 +2,22 @@ from typing import Union
 from tools import translate_func, router_func
 import uvicorn
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
@@ -13,13 +26,16 @@ def read_root():
 
 
 @app.post("/translate")
-async def translate(source_lang: str, target_lang: str, source_code: str):
+async def translate(data: dict):
+    source_lang = data.get("source_lang")
+    target_lang = data.get("target_lang")
+    source_code = data.get("source_code")
+
     router_dict = router_func(source_lang, target_lang, source_code)
 
     junior_model = "gpt-3.5-turbo"
     expert_model = "gpt-4-turbo-preview"
 
-    # print(router_dict)
     if router_dict["expert"].lower() == "true":
         translated_text = translate_func(
             model_name=expert_model,
