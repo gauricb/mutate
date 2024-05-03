@@ -19,7 +19,7 @@ async def translate(source_lang: str, target_lang: str, source_code: str):
     junior_model = "gpt-3.5-turbo"
     expert_model = "gpt-4-turbo-preview"
 
-    print(router_dict)
+    # print(router_dict)
     if router_dict["expert"].lower() == "true":
         translated_text = translate_func(
             model_name=expert_model,
