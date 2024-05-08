@@ -5,17 +5,18 @@ import CodeTranslator from "./components/CodeTranslate.js";
 import Home from "./pages/Home.js";
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <MainNavbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/translate" element={<CodeTranslator />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+	return (
+		<Router>
+			<div className="App">
+				<MainNavbar />
+				<Routes>
+					<Route path="/translate" element={<CodeTranslator />} />
+					<Route path="/history" element={<Home />} />
+					{/* <Route path="/translate" element={<CodeTranslator />} /> */}
+				</Routes>
+			</div>
+		</Router>
+	);
 }
 
 export default App;
