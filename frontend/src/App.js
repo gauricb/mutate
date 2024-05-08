@@ -1,17 +1,21 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainNavbar from "./components/Navbar.js";
+import CodeTranslator from "./components/CodeTranslate.js";
+import Home from "./pages/Home.js";
 
 function App() {
-	return (
-		<div className="App">
-			<MainNavbar />
-			<header className="App-header">
-				<h1>Welcome to ByteLingo</h1>
-				<p>This is your starting point.</p>
-			</header>
-		</div>
-	);
+  return (
+    <Router>
+      <div className="App">
+        <MainNavbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/translate" element={<CodeTranslator />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
