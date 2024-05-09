@@ -7,27 +7,35 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import MainNavbar from "../components/Navbar.js";
 
 const CodeTranslator = () => {
-  // State for selected programming languages
   const [inputLanguage, setInputLanguage] = useState("");
   const [outputLanguage, setOutputLanguage] = useState("");
-  // State for code inputted by the user
   const [inputCode, setInputCode] = useState("");
-  // State for translated code
   const [outputText, setOutputText] = useState("");
 
-  // Handler for translating code
   const translateCode = () => {
-    // Construct the request body
+    // Check if input code is empty
+    if (!inputCode.trim()) {
+      alert("Please enter code to translate.");
+      return;
+    }
+
+    // Check if input language and output language are different
+    if (inputLanguage === outputLanguage) {
+      alert("Input and output languages must be different.");
+      return;
+    }
+
     const requestBody = {
       source_lang: inputLanguage,
       target_lang: outputLanguage,
       source_code: inputCode,
     };
 
-    // Make a POST request to the backend endpoint
     fetch("http://127.0.0.1:8000/translate", {
       method: "POST",
       headers: {
@@ -49,16 +57,21 @@ const CodeTranslator = () => {
       });
   };
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(outputText);
+    alert("Copied to clipboard!");
+  };
+
   return (
-    <div>
+    <div style={{ backgroundColor: "#f0f8ff", minHeight: "100vh" }}>
       <MainNavbar />
-      <Container>
+
+      <Container className="py-5">
         <Row>
-          {/* Input Section */}
-          <Col>
-            <h2>Input Language</h2>
+          <Col md={4}>
+            <h2 className="mb-4">Input Language</h2>
             <Dropdown>
-              <Dropdown.Toggle variant="success" id="input-language-dropdown">
+              <Dropdown.Toggle variant="primary" id="input-language-dropdown">
                 {inputLanguage || "Select Language"}
               </Dropdown.Toggle>
               <Dropdown.Menu>
@@ -77,35 +90,29 @@ const CodeTranslator = () => {
                 <Dropdown.Item onClick={() => setInputLanguage("C")}>
                   C
                 </Dropdown.Item>
-                {/* Add more languages as needed */}
               </Dropdown.Menu>
             </Dropdown>
             <FormControl
               as="textarea"
               placeholder="Enter code here..."
-              style={{
-                backgroundColor: "#f8f9fa",
-                color: "#212529",
-                height: "300px",
-                fontSize: "16px",
-                fontFamily: "Arial, sans-serif",
-                marginTop: "10px",
-              }}
+              className="mt-3"
+              style={{ height: "300px", fontSize: "16px" }}
               value={inputCode}
               onChange={(e) => setInputCode(e.target.value)}
             />
           </Col>
-          {/* Translate Button */}
-          <Col className="d-flex align-items-center justify-content-center">
-            <Button variant="primary" onClick={translateCode}>
+          <Col
+            md={4}
+            className="d-flex flex-column align-items-center justify-content-center"
+          >
+            <Button variant="info" className="my-3" onClick={translateCode}>
               Translate
             </Button>
           </Col>
-          {/* Output Section */}
-          <Col>
-            <h2>Output Language</h2>
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="output-language-dropdown">
+          <Col md={4}>
+            <h2 className="mb-4">Output Language</h2>
+            <Dropdown className="mb-3">
+              <Dropdown.Toggle variant="primary" id="output-language-dropdown">
                 {outputLanguage || "Select Language"}
               </Dropdown.Toggle>
               <Dropdown.Menu>
@@ -124,23 +131,29 @@ const CodeTranslator = () => {
                 <Dropdown.Item onClick={() => setOutputLanguage("C")}>
                   C
                 </Dropdown.Item>
-                {/* Add more languages as needed */}
               </Dropdown.Menu>
             </Dropdown>
-            <FormControl
-              as="textarea"
-              placeholder="Translated code will appear here..."
-              style={{
-                backgroundColor: "#f8f9fa",
-                color: "#212529",
-                height: "300px",
-                fontSize: "16px",
-                fontFamily: "Arial, sans-serif",
-                marginTop: "10px",
-              }}
-              readOnly
-              value={outputText} // Bind the value attribute to outputText state variable
-            />
+            <Button
+              variant="secondary"
+              onClick={copyToClipboard}
+              disabled={!outputText}
+            >
+              <img
+                src="https://icon-library.com/images/copy-to-clipboard-icon/copy-to-clipboard-icon-1.jpg"
+                alt="copy"
+                width="20"
+                height="20"
+                className="mr-2"
+              />
+              Copy Output
+            </Button>
+            <SyntaxHighlighter
+              language="javascript"
+              style={tomorrow}
+              className="mt-3"
+            >
+              {outputText}
+            </SyntaxHighlighter>
           </Col>
         </Row>
       </Container>
