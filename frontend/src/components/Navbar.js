@@ -18,7 +18,7 @@ const MainNavbar = () => {
 				<NavDropdown
 					title={`Signed in as: ${current_user}`}
 					id="collapsible-nav-dropdown">
-					<NavDropdown.Item href="#">Logout</NavDropdown.Item>
+					<NavDropdown.Item href="login">Logout</NavDropdown.Item>
 				</NavDropdown>
 			</Container>
 		</Navbar>
