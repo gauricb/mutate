@@ -1,15 +1,26 @@
 import { useState } from "react";
 import React from "react";
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import {
+	Container,
+	Row,
+	Col,
+	Card,
+	Form,
+	Button,
+	Modal,
+} from "react-bootstrap";
 import axios from "axios";
 
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [showModal, setShowModal] = useState(false);
+
 	const config = {
 		headers: { "content-type": "application/x-www-form-urlencoded" },
 	};
 	const url = "http://127.0.0.1:8000/token";
+
 	const handleLogin = () => {
 		let User = new FormData();
 		User.append("username", email);
@@ -20,11 +31,18 @@ function Login() {
 			.post(url, User, config)
 			.then((response) => {
 				console.log(response);
+				localStorage.setItem("token", response.data.access_token);
+				if (response.status === 200) {
+					window.location.href = "/translate";
+				}
 			})
 			.catch((error) => {
 				console.log(error);
+				setShowModal(true);
 			});
 	};
+
+	const handleCloseModal = () => setShowModal(false);
 
 	return (
 		<section className="vh-100" style={{ backgroundColor: "#e3f2fd" }}>
@@ -111,6 +129,20 @@ function Login() {
 					</Col>
 				</Row>
 			</Container>
+
+			<Modal show={showModal} onHide={handleCloseModal} centered>
+				<Modal.Header closeButton>
+					<Modal.Title>Login Error</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<p>The username or password is incorrect. Please try again.</p>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={handleCloseModal}>
+						Close
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</section>
 	);
 }
