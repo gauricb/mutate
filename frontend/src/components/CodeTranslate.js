@@ -1,17 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
-  Container,
-  Row,
-  Col,
-  Dropdown,
-  FormControl,
-  Button,
+	Container,
+	Row,
+	Col,
+	Dropdown,
+	FormControl,
+	Button,
+	Modal,
 } from "react-bootstrap";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import MainNavbar from "../components/Navbar.js";
 
 const CodeTranslator = () => {
+  const [showModal, setShowModal] = useState(false);
+	const handleCloseModal = () => {
+		setShowModal(false);
+		window.location.href = "/login";
+	};
+	// check if the user is logged in
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		// TODO: check if token is expired
+		if (!token) {
+			setShowModal(true);
+		}
+	}, []);
+
   const [inputLanguage, setInputLanguage] = useState("");
   const [outputLanguage, setOutputLanguage] = useState("");
   const [inputCode, setInputCode] = useState("");
@@ -157,6 +172,21 @@ const CodeTranslator = () => {
           </Col>
         </Row>
       </Container>
+
+    {/* Modal for displaying login error */}
+			<Modal show={showModal} onHide={handleCloseModal} centered>
+				<Modal.Header closeButton>
+					<Modal.Title>Login Error</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<p>Please Login</p>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={handleCloseModal}>
+						Close
+					</Button>
+				</Modal.Footer>
+			</Modal>
     </div>
   );
 };
