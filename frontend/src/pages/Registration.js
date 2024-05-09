@@ -1,7 +1,38 @@
-import React from "react";
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import { useState } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+  Alert,
+} from "react-bootstrap";
 
-function Login() {
+function Registration() {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPasswordAlert, setShowPasswordAlert] = useState(false);
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (password.length < 8) {
+      setShowPasswordAlert(true);
+    } else if (password !== confirmPassword) {
+      console.log("Passwords do not match");
+    } else {
+      // Submit form
+    }
+  };
+
   return (
     <section className="vh-100" style={{ backgroundColor: "#e3f2fd" }}>
       <Container fluid className="py-5 h-100">
@@ -11,15 +42,15 @@ function Login() {
               <Row className="g-0">
                 <Col md={6} lg={5} className="d-none d-md-block">
                   <Card.Img
-                    src="https://images.pexels.com/photos/19945132/pexels-photo-19945132/free-photo-of-abstract-background-with-blue-lines.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt="login form"
+                    src="https://images.pexels.com/photos/4747919/pexels-photo-4747919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    alt="registration form"
                     className="img-fluid"
                     style={{ borderRadius: "1rem 0 0 1rem" }}
                   />
                 </Col>
                 <Col md={6} lg={7} className="d-flex align-items-center">
                   <Card.Body className="p-4 p-lg-5 text-black">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                       <div className="d-flex align-items-center mb-3 pb-1">
                         <i
                           className="fas fa-cubes fa-2x me-3"
@@ -32,13 +63,12 @@ function Login() {
                         className="fw-normal mb-3 pb-3"
                         style={{ letterSpacing: "1px" }}
                       >
-                        Sign into your account
+                        Create an account
                       </h5>
 
                       <Form.Group className="mb-4">
                         <Form.Control
                           type="email"
-                          id="form2Example17"
                           placeholder="Email address"
                           className="form-control-lg"
                         />
@@ -47,25 +77,40 @@ function Login() {
                       <Form.Group className="mb-4">
                         <Form.Control
                           type="password"
-                          id="form2Example27"
                           placeholder="Password"
                           className="form-control-lg"
+                          value={password}
+                          onChange={handlePasswordChange}
+                          minLength={8}
+                        />
+                      </Form.Group>
+
+                      <Form.Group className="mb-4">
+                        <Form.Control
+                          type="password"
+                          placeholder="Confirm Password"
+                          className="form-control-lg"
+                          value={confirmPassword}
+                          onChange={handleConfirmPasswordChange}
                         />
                       </Form.Group>
 
                       <div className="pt-1 mb-4">
-                        <Button variant="primary" type="button" size="lg" block>
-                          Login
+                        <Button variant="primary" type="submit" size="lg" block>
+                          Register
                         </Button>
                       </div>
 
-                      <a href="#!" className="small text-muted">
-                        Forgot password?
-                      </a>
+                      {showPasswordAlert && (
+                        <Alert variant="danger">
+                          Password must be at least 8 characters long.
+                        </Alert>
+                      )}
+
                       <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
-                        Don't have an account?{" "}
-                        <a href="register" style={{ color: "#393f81" }}>
-                          Register here
+                        Already have an account?{" "}
+                        <a href="/login" style={{ color: "#393f81" }}>
+                          Sign in
                         </a>
                       </p>
                       <a href="#!" className="small text-muted">
@@ -86,4 +131,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Registration;

@@ -7,6 +7,7 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+import MainNavbar from "../components/Navbar.js";
 
 const CodeTranslator = () => {
   // State for selected programming languages
@@ -49,98 +50,101 @@ const CodeTranslator = () => {
   };
 
   return (
-    <Container>
-      <Row>
-        {/* Input Section */}
-        <Col>
-          <h2>Input Language</h2>
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="input-language-dropdown">
-              {inputLanguage || "Select Language"}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => setInputLanguage("JavaScript")}>
-                JavaScript
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setInputLanguage("Python")}>
-                Python
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setInputLanguage("Java")}>
-                Java
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setInputLanguage("C++")}>
-                C++
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setInputLanguage("C")}>
-                C
-              </Dropdown.Item>
-              {/* Add more languages as needed */}
-            </Dropdown.Menu>
-          </Dropdown>
-          <FormControl
-            as="textarea"
-            placeholder="Enter code here..."
-            style={{
-              backgroundColor: "#f8f9fa",
-              color: "#212529",
-              height: "300px",
-              fontSize: "16px",
-              fontFamily: "Arial, sans-serif",
-              marginTop: "10px",
-            }}
-            value={inputCode}
-            onChange={(e) => setInputCode(e.target.value)}
-          />
-        </Col>
-        {/* Translate Button */}
-        <Col className="d-flex align-items-center justify-content-center">
-          <Button variant="primary" onClick={translateCode}>
-            Translate
-          </Button>
-        </Col>
-        {/* Output Section */}
-        <Col>
-          <h2>Output Language</h2>
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="output-language-dropdown">
-              {outputLanguage || "Select Language"}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => setOutputLanguage("JavaScript")}>
-                JavaScript
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setOutputLanguage("Python")}>
-                Python
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setOutputLanguage("Java")}>
-                Java
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setOutputLanguage("C++")}>
-                C++
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setOutputLanguage("C")}>
-                C
-              </Dropdown.Item>
-              {/* Add more languages as needed */}
-            </Dropdown.Menu>
-          </Dropdown>
-          <FormControl
-            as="textarea"
-            placeholder="Translated code will appear here..."
-            style={{
-              backgroundColor: "#f8f9fa",
-              color: "#212529",
-              height: "300px",
-              fontSize: "16px",
-              fontFamily: "Arial, sans-serif",
-              marginTop: "10px",
-            }}
-            readOnly
-            value={outputText} // Bind the value attribute to outputText state variable
-          />
-        </Col>
-      </Row>
-    </Container>
+    <div>
+      <MainNavbar />
+      <Container>
+        <Row>
+          {/* Input Section */}
+          <Col>
+            <h2>Input Language</h2>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="input-language-dropdown">
+                {inputLanguage || "Select Language"}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => setInputLanguage("JavaScript")}>
+                  JavaScript
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setInputLanguage("Python")}>
+                  Python
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setInputLanguage("Java")}>
+                  Java
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setInputLanguage("C++")}>
+                  C++
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setInputLanguage("C")}>
+                  C
+                </Dropdown.Item>
+                {/* Add more languages as needed */}
+              </Dropdown.Menu>
+            </Dropdown>
+            <FormControl
+              as="textarea"
+              placeholder="Enter code here..."
+              style={{
+                backgroundColor: "#f8f9fa",
+                color: "#212529",
+                height: "300px",
+                fontSize: "16px",
+                fontFamily: "Arial, sans-serif",
+                marginTop: "10px",
+              }}
+              value={inputCode}
+              onChange={(e) => setInputCode(e.target.value)}
+            />
+          </Col>
+          {/* Translate Button */}
+          <Col className="d-flex align-items-center justify-content-center">
+            <Button variant="primary" onClick={translateCode}>
+              Translate
+            </Button>
+          </Col>
+          {/* Output Section */}
+          <Col>
+            <h2>Output Language</h2>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="output-language-dropdown">
+                {outputLanguage || "Select Language"}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => setOutputLanguage("JavaScript")}>
+                  JavaScript
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setOutputLanguage("Python")}>
+                  Python
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setOutputLanguage("Java")}>
+                  Java
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setOutputLanguage("C++")}>
+                  C++
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setOutputLanguage("C")}>
+                  C
+                </Dropdown.Item>
+                {/* Add more languages as needed */}
+              </Dropdown.Menu>
+            </Dropdown>
+            <FormControl
+              as="textarea"
+              placeholder="Translated code will appear here..."
+              style={{
+                backgroundColor: "#f8f9fa",
+                color: "#212529",
+                height: "300px",
+                fontSize: "16px",
+                fontFamily: "Arial, sans-serif",
+                marginTop: "10px",
+              }}
+              readOnly
+              value={outputText} // Bind the value attribute to outputText state variable
+            />
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 
