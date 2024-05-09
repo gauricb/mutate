@@ -7,6 +7,7 @@ import logo from "../logo.svg";
 import ByteLingo from "../ByteLingo.png";
 
 const MainNavbar = () => {
+
 	const [currentUser, setCurrentUser] = useState("xyz@umass.edu");
 
 	useEffect(() => {
