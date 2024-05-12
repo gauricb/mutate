@@ -11,7 +11,6 @@ def evaluate_func(
     return chain.invoke(
         {
             "target_lang": target_lang,
-            "source_code": source_code,
             "correct_translation": correct_translation,
             "generated_translation": generated_translation,
         }
