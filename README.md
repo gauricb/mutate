@@ -1,4 +1,4 @@
-# Bytelingo: Programming Language Translation Tool 🦜
+# Bytelingo: Programming Language Translation Tool
 
 Bytelingo is a robust programming language translation tool powered by Large Language Models (LLMs). It offers a clean and minimalist design, providing a user-friendly experience for developers to translate code between different programming languages seamlessly.
 
@@ -30,6 +30,8 @@ Create a `.env` file in the root directory and add the required environment vari
 - `OPENAI_API_KEY`: Your OpenAI API key for accessing the LLM.
 - `SUPABASE_URL`: The URL for your Supabase database instance.
 - `SUPABASE_KEY`: The key for your Supabase database instance.
+
+We are using two LLM models: `gpt-3.5-turbo` and `gpt-4-turbo-preview`. However, we recognize that LLMs change constantly. If a newer LLM is released from OpenAI, you could change the configurations to that simply by updating the `model_name` parameter when calling the `translate_func` in `main.py`.
 
 ## Datasets
 
