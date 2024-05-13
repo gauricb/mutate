@@ -75,6 +75,14 @@ class UserInDB(User):
     hashed_password: str
 
 
+class TranslationInput(BaseModel):
+    inputLang: str
+    outputLang: str
+    input: str
+    output: str
+    rating: int
+
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
@@ -231,9 +239,59 @@ async def login_for_access_token(
     return Token(access_token=access_token, token_type="bearer")
 
 
+@app.post("/translations", status_code=status.HTTP_201_CREATED)
+async def add_translation(
+    translation: TranslationInput,
+    current_user: User = Depends(get_current_user),  # Inject current user info
+):
+
+    # Extract current user's name
+    current_user_name = current_user.username
+
+    # Construct data for the translation
+    new_translation = {
+        "input_lang": translation.inputLang,
+        "output_lang": translation.outputLang,
+        "input": translation.input,
+        "output": translation.output,
+        "rating": translation.rating,
+    }
+
+    # Fetch the current user's data from the database
+    user_data = (
+        supabase.table("bytelingo_users")
+        .select("translations")
+        .eq("username", current_user_name)
+        .execute()
+    )
+    if not user_data.data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
+        )
+
+    # Extract the existing translations array or initialize an empty array if it doesn't exist
+    translations = user_data.data[0].get("translations", [])
+
+    if translations is None:
+        translations = []
+
+    # Append the new translation object to the translations array
+    translations.append(new_translation)
+
+    # Update the user's data in the database with the updated translations array
+    result = (
+        supabase.table("bytelingo_users")
+        .update({"translations": translations})
+        .eq("username", current_user_name)
+        .execute()
+    )
+
+    return {"message": "Translation added successfully"}
+
+
 @app.get("/get_users")
 async def get_users():
-    return fake_users_db
+    return supabase.table("bytelingo_users").select("*").execute()
 
 
 @app.get("/users/me/", response_model=User)
