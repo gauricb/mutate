@@ -58,19 +58,22 @@ function add_a_couple(c, d) {
     return d + c;
 }
 console.log(add_a_couple(3, 6));
-"""
+""",
+        "should_use_expert": False
     },
     {
-        "source_lang": "",
-        "target_lang": "",
-        "source_code": "",
-        "correct_translation": ""
+        "source_lang": "Java",
+        "target_lang": "C#",
+        "source_code": "public int indexOfValue(int value) {for (int i = 0; i < mSize; i++)if (mValues[i] == value)return i;return -1;}",
+        "correct_translation": "public virtual int indexOfValue(int value){{for (int i = 0; i < mSize; i++){if (mValues[i] == value){return i;}}}return -1;}",
+        "should_use_expert": False
     },
     {
-        "source_lang": "",
-        "target_lang": "",
-        "source_code": "",
-        "correct_translation": ""
+        "source_lang": "C#",
+        "target_lang": "Java",
+        "source_code": "public virtual SpanQuery MakeSpanClause(){List<SpanQuery> spanQueries = new List<SpanQuery>();foreach (var wsq in weightBySpanQuery){wsq.Key.Boost = wsq.Value;spanQueries.Add(wsq.Key);}if (spanQueries.Count == 1)return spanQueries[0];else return new SpanOrQuery(spanQueries.ToArray());}",
+        "correct_translation": "public SpanQuery makeSpanClause() {SpanQuery [] spanQueries = new SpanQuery[size()];Iterator<SpanQuery> sqi = weightBySpanQuery.keySet().iterator();int i = 0;while (sqi.hasNext()) {SpanQuery sq = sqi.next();float boost = weightBySpanQuery.get(sq);if (boost != 1f) {sq = new SpanBoostQuery(sq, boost);}spanQueries[i++] = sq;}if (spanQueries.length == 1)return spanQueries[0];else return new SpanOrQuery(spanQueries);}",
+        "should_use_expert": False
     },
 ]
 
