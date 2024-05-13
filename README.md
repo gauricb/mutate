@@ -1,4 +1,4 @@
-# Bytelingo: Programming Language Translation Tool
+# Bytelingo: Programming Language Translation Tool 🦜
 
 Bytelingo is a robust programming language translation tool powered by Large Language Models (LLMs). It offers a clean and minimalist design, providing a user-friendly experience for developers to translate code between different programming languages seamlessly.
 
