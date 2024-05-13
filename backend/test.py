@@ -22,6 +22,7 @@ def test_translate(data: dict):
     target_lang = data.get("target_lang")
     source_code = data.get("source_code")
     correct_translation = data.get("correct_translation")
+    should_use_expert = data.get("should_use_expert")
 
     router_dict = router_func(source_lang, target_lang, source_code)
 
@@ -40,5 +41,40 @@ def test_translate(data: dict):
 
     return {
         "translated_correctly": evaluation,
-        "routed_correctly": True if used_expert else evaluation
+        "routed_correctly": should_use_expert if used_expert else evaluation
     }
+
+test_cases = [
+    {
+        "source_lang": "Python",
+        "target_lang": "Javascript",
+        "source_code": """
+def add_two(a, b):
+    return a + b
+print(add_two(3, 6))
+""",
+        "correct_translation": """
+function add_a_couple(c, d) {
+    return d + c;
+}
+console.log(add_a_couple(3, 6));
+"""
+    },
+    {
+        "source_lang": "",
+        "target_lang": "",
+        "source_code": "",
+        "correct_translation": ""
+    },
+    {
+        "source_lang": "",
+        "target_lang": "",
+        "source_code": "",
+        "correct_translation": ""
+    },
+]
+
+for data in test_cases:
+    result = test_translate(data)
+    assert(result["translated_correctly"])
+    assert(result["routed_correctly"])
