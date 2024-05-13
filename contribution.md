@@ -18,12 +18,16 @@ Worked on the following:
 - Made feedback system: made UI and backend endpoints
 - Wrote unit tests for auth system
 
-_Matthew Richardson_:
+**Matthew Richardson**
 
 Worked on the following:
 
-- Wrote test for the translator service using LLM as an evaluator
+- Wrote tests for the translator service, and the translate_test.py file witch uses GPT 3.5 as an evaluator
+- Read recent code-to-code translation papers to inform prompt engineering decisions and testing methods
+- Created non-functional requirements slide for midterm presentation
 
-_Arnesh S_:
+**Arnesh S**
 
--
+Worked on the following:
+
+- Created sequence diagrams for midterm slides
