@@ -42,8 +42,15 @@ Create a `.env` file in the root directory and add the required environment vari
 
 We are using two LLM models: `gpt-3.5-turbo` and `gpt-4-turbo-preview`. However, we recognize that LLMs change constantly. If a newer LLM is released from OpenAI, you could change the configurations to that simply by updating the `model_name` parameter when calling the `translate_func` in `main.py`. 
 
-As for testing, the tests for the authentication service is found in `auth_test.py` and the tests for the translation service is found in `translate_test.py`. You can run them by running the files. 
+As for testing, the tests for the authentication service are found in `auth_test.py`, and the tests for the translation service are found in `translate_test.py`. You can run them by executing the following commands:
 
+```bash
+# For authentication service tests
+python auth_test.py
+
+# For translation service tests
+python translate_test.py
+```
 ## Datasets
 
 Bytelingo does not rely on any specific datasets. Though it could be useful to use a dataset to benchmark translation quality. Some of the testing examples are from CodeXGLUE.
