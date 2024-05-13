@@ -1,0 +1,28 @@
+_type: prompt
+input_variables:
+  - target_lang
+  - correct_translation
+  - generated_translation
+
+template: |
+  You are an expert at programming in {target_lang}, and need to determine if two pieces of {target_lang} code are functionally equivalent.
+
+  Here is source code A that we know works correctly:
+
+  """
+  {correct_translation}
+  """
+
+  And here is source code B that should be functionally equivalent to source code A from above:
+
+  """
+  {generated_translation}
+  """
+
+  You will need to follow these steps to complete the task:
+
+  1. Look at both source code A and source code B, identifying how each part of the code works, and what they are supposed to do.
+  2. Determine whether or not the behavior, logic, and functionality of source code A is the same as in source code B.
+  3. Check source code B for any errors or issues which would limit its functionality.
+
+  Let's think step by step, and state "True" if the two pieces of {target_lang} code are functionally equivalent. Otherwise state "False", and in both cases do not include anything else in the response:
