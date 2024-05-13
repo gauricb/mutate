@@ -5,14 +5,6 @@ Bytelingo is a robust programming language translation tool powered by Large Lan
 ## Features
 
 - **User Registration and Login:** Bytelingo allows users to create accounts and securely log in to access the translation features.
-
-# Bytelingo: Programming Language Translation Tool
-
-Bytelingo is a robust programming language translation tool powered by Large Language Models (LLMs). It offers a clean and minimalist design, providing a user-friendly experience for developers to translate code between different programming languages seamlessly.
-
-## Features
-
-- **User Registration and Login:** Bytelingo allows users to create accounts and securely log in to access the translation features.
 - **Translation Page:** Users can specify the input and output programming languages and provide code snippets for translation. The output code will also support syntax highlighting, just like a regular IDE! For example:
 
 ```python
