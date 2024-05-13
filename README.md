@@ -54,3 +54,7 @@ python translate_test.py
 ## Datasets
 
 Bytelingo does not rely on any specific datasets. Though it could be useful to use a dataset to benchmark translation quality. Some of the testing examples are from CodeXGLUE and HumanEval-X.
+
+## Demo
+
+[Watch](https://drive.google.com/file/d/1wyEdGj-jtMSBReLFzkef0pGn6xdra6FT/view?usp=sharing)
