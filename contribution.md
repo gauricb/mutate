@@ -23,11 +23,7 @@ Worked on the following:
 Worked on the following:
 
 - Wrote tests for the translator service, and the translate_test.py file witch uses GPT 3.5 as an evaluator
-- Read recent code-to-code translation papers to inform prompt engineering decisions and testing methods
-- Created non-functional requirements slide for midterm presentation
 
 **Arnesh S**
 
 Worked on the following:
-
-- Created sequence diagrams for midterm slides
